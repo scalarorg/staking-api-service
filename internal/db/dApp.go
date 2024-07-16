@@ -52,3 +52,36 @@ func (db *Database) UpdateDApp(ctx context.Context, ID, chainName, addressHex, p
 	updateResult := dApps.FindOneAndUpdate(ctx, filter, update)
 	return updateResult.Err()
 }
+
+func (db *Database) ActiveDApp(ctx context.Context, ID string) error {
+	dApps := db.Client.Database(db.DbName).Collection(model.DAppCollection)
+	// convert ID to objectID
+	_id, err := primitive.ObjectIDFromHex(ID)
+	if err != nil {
+		return err
+	}
+	filter := bson.M{"_id": _id}
+	var result model.DAppDocument
+	err = dApps.FindOne(ctx, filter).Decode(&result)
+	if err != nil {
+		return err
+	}
+	update := bson.M{"$set": bson.M{"state": !result.State}}
+	updateResult := dApps.FindOneAndUpdate(ctx, filter, update)
+	return updateResult.Err()
+}
+
+func (db *Database) DeleteDApp(ctx context.Context, ID string) error {
+	dApps := db.Client.Database(db.DbName).Collection(model.DAppCollection)
+	// convert ID to objectID
+	_id, err := primitive.ObjectIDFromHex(ID)
+	if err != nil {
+		return err
+	}
+	filter := bson.M{"_id": _id}
+	_, err = dApps.DeleteOne(ctx, filter)
+	if err != nil {
+		return err
+	}
+	return nil
+}

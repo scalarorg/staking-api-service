@@ -31,5 +31,20 @@ func (s *Services) UpdateDApp(ctx context.Context, ID, chainName, btcAddressHex,
 		return types.NewError(http.StatusInternalServerError, types.InternalServiceError, err)
 	}
 	return nil
+}
 
+func (s *Services) ActiveDApp(ctx context.Context, ID string) *types.Error {
+	err := s.DbClient.ActiveDApp(ctx, ID)
+	if err != nil {
+		return types.NewError(http.StatusInternalServerError, types.InternalServiceError, err)
+	}
+	return nil
+}
+
+func (s *Services) DeleteDApp(ctx context.Context, ID string) *types.Error {
+	err := s.DbClient.DeleteDApp(ctx, ID)
+	if err != nil {
+		return types.NewError(http.StatusInternalServerError, types.InternalServiceError, err)
+	}
+	return nil
 }

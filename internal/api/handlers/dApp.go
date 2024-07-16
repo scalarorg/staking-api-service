@@ -12,6 +12,16 @@ type CreateDAppRequestPayload struct {
 	BTCAddressHex string `json:"btc_address_hex"`
 	PublicKeyHex  string `json:"public_key_hex"`
 }
+type UpdateDAppRequestPayload struct {
+	ID            string `json:"id"`
+	ChainName     string `json:"chain_name"`
+	BTCAddressHex string `json:"btc_address_hex"`
+	PublicKeyHex  string `json:"public_key_hex"`
+}
+
+type IdRequestPayload struct {
+	ID string `json:"id"`
+}
 
 func parseCreateDAppPayload(request *http.Request) (*CreateDAppRequestPayload, *types.Error) {
 	payload := &CreateDAppRequestPayload{}
@@ -38,15 +48,17 @@ func parseCreateDAppPayload(request *http.Request) (*CreateDAppRequestPayload, *
 	return payload, nil
 }
 
-type UpdateDAppRequestPayload struct {
-	ID            string `json:"id"`
-	ChainName     string `json:"chain_name"`
-	BTCAddressHex string `json:"btc_address_hex"`
-	PublicKeyHex  string `json:"public_key_hex"`
-}
-
 func parseUpdateDAppPayload(request *http.Request) (*UpdateDAppRequestPayload, *types.Error) {
 	payload := &UpdateDAppRequestPayload{}
+	err := json.NewDecoder(request.Body).Decode(payload)
+	if err != nil {
+		return nil, types.NewErrorWithMsg(http.StatusBadRequest, types.BadRequest, "invalid request payload")
+	}
+	return payload, nil
+}
+
+func parseIdDAppPayload(request *http.Request) (*IdRequestPayload, *types.Error) {
+	payload := &IdRequestPayload{}
 	err := json.NewDecoder(request.Body).Decode(payload)
 	if err != nil {
 		return nil, types.NewErrorWithMsg(http.StatusBadRequest, types.BadRequest, "invalid request payload")
@@ -92,4 +104,29 @@ func (h *Handler) UpdateDApp(request *http.Request) (*Result, *types.Error) {
 	}
 
 	return NewResult(payload), nil
+}
+
+func (h *Handler) ActiveDApp(request *http.Request) (*Result, *types.Error) {
+	payload, err := parseIdDAppPayload(request)
+	if err != nil {
+		return nil, err
+	}
+	err = h.services.ActiveDApp(request.Context(), payload.ID)
+	if err != nil {
+		return nil, err
+	}
+	return NewResult(payload), nil
+}
+
+func (h *Handler) DeleteDApp(request *http.Request) (*Result, *types.Error) {
+	payload, err := parseIdDAppPayload(request)
+	if err != nil {
+		return nil, err
+	}
+	err = h.services.DeleteDApp(request.Context(), payload.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return NewResult("Delete successfully"), nil
 }

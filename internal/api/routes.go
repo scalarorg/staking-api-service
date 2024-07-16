@@ -21,10 +21,10 @@ func (a *Server) SetupRoutes(r *chi.Mux) {
 	r.Get("/v1/delegation", registerHandler(handlers.GetDelegationByTxHash))
 
 	r.Post("/v1/dApp", registerHandler(handlers.CreateDApp))
-	r.Get("/v1/dApps", registerHandler(handlers.GetDApp))
+	r.Get("/v1/dApp", registerHandler(handlers.GetDApp))
 	r.Put("/v1/dApp", registerHandler(handlers.UpdateDApp))
-	// r.Patch("/v1/dApp", registerHandler(handlers.UpdateDApp)) // Disable dApp
-	// r.Delete("/v1/dApp", registerHandler(handlers.DeleteDApp))
+	r.Patch("/v1/dApp", registerHandler(handlers.ActiveDApp)) // Enable/Disable dApp
+	r.Delete("/v1/dApp", registerHandler(handlers.DeleteDApp))
 
 	r.Get("/swagger/*", httpSwagger.WrapHandler)
 }
