@@ -12,10 +12,10 @@ func (s *Services) CreateDApp(ctx context.Context, chainName, addressHex, public
 	if err != nil {
 		return types.NewError(http.StatusInternalServerError, types.InternalServiceError, err)
 	}
-	// err2 := s.DbClient.SaveDApp(ctx, chainName, addressHex, publicKeyHex)
-	// if err2 != nil {
-	// 	return types.NewError(http.StatusInternalServerError, types.InternalServiceError, err)
-	// }
+	err = s.DbClient.SaveDApp(ctx, chainName, addressHex, publicKeyHex)
+	if err != nil {
+		return types.NewError(http.StatusInternalServerError, types.InternalServiceError, err)
+	}
 	return nil
 
 }

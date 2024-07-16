@@ -22,3 +22,15 @@ func (db *Database) IsDAppExist(ctx context.Context, addressHex, publicKeyHex, c
 	}
 	return nil
 }
+func (db *Database) SaveDApp(ctx context.Context, addressHex, publicKeyHex, chainName string) error {
+	dApps := db.Client.Database(db.DbName).Collection(model.DAppCollection)
+	dApp := model.DAppDocument{
+		AddressHex:   addressHex,
+		PublicKeyHex: publicKeyHex,
+		ChainName:    chainName,
+		State:        true,
+	}
+	// insert unique dApp
+	_, err := dApps.InsertOne(ctx, dApp)
+	return err
+}
