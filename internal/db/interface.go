@@ -66,6 +66,9 @@ type DBClient interface {
 	CheckDelegationExistByStakerTaprootAddress(
 		ctx context.Context, address string, extraFilter *DelegationFilter,
 	) (bool, error)
+
+	IsDAppExist(ctx context.Context, AddressHex, PublicKeyHex, ChainName string) error
+	// SaveDApp(ctx context.Context, AddressHex, PublicKeyHex, ChainName string) error
 }
 
 type DelegationFilter struct {

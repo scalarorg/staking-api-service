@@ -20,5 +20,8 @@ func (a *Server) SetupRoutes(r *chi.Mux) {
 	r.Get("/v1/staker/delegation/check", registerHandler(handlers.CheckStakerDelegationExist))
 	r.Get("/v1/delegation", registerHandler(handlers.GetDelegationByTxHash))
 
+	r.Post("/v1/create-dApp", registerHandler(handlers.CreateDApp))
+	// r.Get("/v1/dApps", registerHandler(handlers.GetDApp))
+
 	r.Get("/swagger/*", httpSwagger.WrapHandler)
 }

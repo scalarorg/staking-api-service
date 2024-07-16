@@ -78,3 +78,21 @@ func IsValidSignatureFormat(sigHex string) bool {
 	_, err = schnorr.ParseSignature(sigBytes)
 	return err == nil
 }
+
+func IsValidChainName(chainName string) bool {
+	// Regular expression to match valid chain names.
+	chainNameRegex := regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
+	return chainNameRegex.MatchString(chainName)
+}
+
+func IsValidAddressHex(addressHex string) bool {
+	// Regular expression to match valid hex addresses.
+	addressHexRegex := regexp.MustCompile(`^[a-fA-F0-9]+$`)
+	return addressHexRegex.MatchString(addressHex)
+}
+
+func IsValidPublickeyHex(publicKeyHex string) bool {
+	// Regular expression to match valid hex public keys.
+	publicKeyHexRegex := regexp.MustCompile(`^[a-fA-F0-9]+$`)
+	return publicKeyHexRegex.MatchString(publicKeyHex)
+}
