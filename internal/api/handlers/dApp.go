@@ -9,9 +9,9 @@ import (
 )
 
 type CreateDAppRequestPayload struct {
-	ChainName    string `json:"chain_name"`
-	AddressHex   string `json:"address_hex_eth"`
-	PublicKeyHex string `json:"public_key_hex"`
+	ChainName     string `json:"chain_name"`
+	BTCAddressHex string `json:"BTC_address_hex"`
+	PublicKeyHex  string `json:"public_key_hex"`
 }
 
 func parseCreateDAppPayload(request *http.Request) (*CreateDAppRequestPayload, *types.Error) {
@@ -26,7 +26,7 @@ func parseCreateDAppPayload(request *http.Request) (*CreateDAppRequestPayload, *
 			http.StatusBadRequest, types.BadRequest, "invalid chain name",
 		)
 	}
-	if !utils.IsValidAddressHex(payload.AddressHex) {
+	if !utils.IsValidAddressHex(payload.BTCAddressHex) {
 		return nil, types.NewErrorWithMsg(
 			http.StatusBadRequest, types.BadRequest, "invalid address hex",
 		)
@@ -46,7 +46,7 @@ func (h *Handler) CreateDApp(request *http.Request) (*Result, *types.Error) {
 		return nil, err
 	}
 
-	err = h.services.CreateDApp(request.Context(), payload.ChainName, payload.AddressHex, payload.PublicKeyHex)
+	err = h.services.CreateDApp(request.Context(), payload.ChainName, payload.BTCAddressHex, payload.PublicKeyHex)
 	if err != nil {
 		return nil, err
 	}

@@ -7,12 +7,12 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func (db *Database) IsDAppExist(ctx context.Context, addressHex, publicKeyHex, chainName string) error {
+func (db *Database) IsDAppExist(ctx context.Context, chainName, addressHex, publicKeyHex string) error {
 	dApps := db.Client.Database(db.DbName).Collection(model.DAppCollection)
 	dAppsFilter := bson.M{
-		"address":    addressHex,
-		"public_key": publicKeyHex,
-		"chain_name": chainName,
+		"chain_name":      chainName,
+		"btc_address_hex": addressHex,
+		"public_key":      publicKeyHex,
 	}
 	// Check if the dApp already exists
 	err := dApps.FindOne(ctx, dAppsFilter).Err()
@@ -22,13 +22,13 @@ func (db *Database) IsDAppExist(ctx context.Context, addressHex, publicKeyHex, c
 	}
 	return nil
 }
-func (db *Database) SaveDApp(ctx context.Context, addressHex, publicKeyHex, chainName string) error {
+func (db *Database) SaveDApp(ctx context.Context, chainName, addressHex, publicKeyHex string) error {
 	dApps := db.Client.Database(db.DbName).Collection(model.DAppCollection)
 	dApp := model.DAppDocument{
-		AddressHex:   addressHex,
-		PublicKeyHex: publicKeyHex,
-		ChainName:    chainName,
-		State:        true,
+		ChainName:     chainName,
+		BTCAddressHex: addressHex,
+		PublicKeyHex:  publicKeyHex,
+		State:         true,
 	}
 	// insert unique dApp
 	_, err := dApps.InsertOne(ctx, dApp)

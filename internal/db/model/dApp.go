@@ -1,8 +1,8 @@
 package model
 
 type DAppDocument struct {
-	AddressHex   string `bson:"address_hex"`
-	PublicKeyHex string `bson:"public_key`
-	ChainName    string `bson:"chain_name"`
-	State        bool   `bson:"state"`
+	ChainName     string `bson:"chain_name"`
+	BTCAddressHex string `bson:"btc_address_hex"`
+	PublicKeyHex  string `bson:"public_key_hex`
+	State         bool   `bson:"state"`
 }
