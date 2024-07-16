@@ -5,6 +5,7 @@ import (
 
 	"github.com/babylonchain/staking-api-service/internal/db/model"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (db *Database) SaveDApp(ctx context.Context, chainName, addressHex, publicKeyHex string) error {
@@ -37,4 +38,17 @@ func (db *Database) GetDApp(ctx context.Context) ([]*model.DAppDocument, error) 
 		dAppDocuments = append(dAppDocuments, &dApp)
 	}
 	return dAppDocuments, nil
+}
+
+func (db *Database) UpdateDApp(ctx context.Context, ID, chainName, addressHex, publicKeyHex string) error {
+	dApps := db.Client.Database(db.DbName).Collection(model.DAppCollection)
+	// convert ID to objectID
+	_id, err := primitive.ObjectIDFromHex(ID)
+	if err != nil {
+		return err
+	}
+	filter := bson.M{"_id": _id}
+	update := bson.M{"$set": bson.M{"chain_name": chainName, "btc_address_hex": addressHex, "public_key_hex": publicKeyHex}}
+	updateResult := dApps.FindOneAndUpdate(ctx, filter, update)
+	return updateResult.Err()
 }
