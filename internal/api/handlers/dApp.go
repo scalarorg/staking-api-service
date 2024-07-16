@@ -51,5 +51,18 @@ func (h *Handler) CreateDApp(request *http.Request) (*Result, *types.Error) {
 		return nil, err
 	}
 
-	return &Result{Status: http.StatusOK}, nil
+	return NewResult(payload), nil
+}
+
+func (h *Handler) GetDApp(request *http.Request) (*Result, *types.Error) {
+	// FUTURE WORK: Implement pagination
+	// paginationKey, err := parsePaginationQuery(request)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	dApps, err := h.services.GetDApp(request.Context())
+	if err != nil {
+		return nil, err
+	}
+	return NewResult(dApps), nil
 }

@@ -69,6 +69,7 @@ type DBClient interface {
 
 	IsDAppExist(ctx context.Context, ChainName, AddressHex, PublicKeyHex string) error
 	SaveDApp(ctx context.Context, ChainName, AddressHex, PublicKeyHex string) error
+	GetDApp(ctx context.Context) ([]*model.DAppDocument, error)
 }
 
 type DelegationFilter struct {
