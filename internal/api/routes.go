@@ -22,6 +22,8 @@ func (a *Server) SetupRoutes(r *chi.Mux) {
 
 	r.Post("/v1/create-dApp", registerHandler(handlers.CreateDApp))
 	r.Get("/v1/dApps", registerHandler(handlers.GetDApp))
+	// r.Put("/v1/dApp", registerHandler(handlers.UpdateDApp))
+	// r.Delete("/v1/dApp", registerHandler(handlers.DeleteDApp))
 
 	r.Get("/swagger/*", httpSwagger.WrapHandler)
 }

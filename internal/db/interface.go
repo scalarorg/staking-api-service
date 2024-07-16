@@ -67,7 +67,6 @@ type DBClient interface {
 		ctx context.Context, address string, extraFilter *DelegationFilter,
 	) (bool, error)
 
-	IsDAppExist(ctx context.Context, ChainName, AddressHex, PublicKeyHex string) error
 	SaveDApp(ctx context.Context, ChainName, AddressHex, PublicKeyHex string) error
 	GetDApp(ctx context.Context) ([]*model.DAppDocument, error)
 }

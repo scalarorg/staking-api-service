@@ -5,12 +5,11 @@ import (
 	"net/http"
 
 	"github.com/babylonchain/staking-api-service/internal/types"
-	"github.com/babylonchain/staking-api-service/internal/utils"
 )
 
 type CreateDAppRequestPayload struct {
 	ChainName     string `json:"chain_name"`
-	BTCAddressHex string `json:"BTC_address_hex"`
+	BTCAddressHex string `json:"btc_address_hex"`
 	PublicKeyHex  string `json:"public_key_hex"`
 }
 
@@ -20,23 +19,22 @@ func parseCreateDAppPayload(request *http.Request) (*CreateDAppRequestPayload, *
 	if err != nil {
 		return nil, types.NewErrorWithMsg(http.StatusBadRequest, types.BadRequest, "invalid request payload")
 	}
-	// Validate the payload fields
-	if !utils.IsValidChainName(payload.ChainName) {
-		return nil, types.NewErrorWithMsg(
-			http.StatusBadRequest, types.BadRequest, "invalid chain name",
-		)
-	}
-	if !utils.IsValidAddressHex(payload.BTCAddressHex) {
-		return nil, types.NewErrorWithMsg(
-			http.StatusBadRequest, types.BadRequest, "invalid address hex",
-		)
-	}
-	if !utils.IsValidPublickeyHex(payload.PublicKeyHex) {
-		return nil, types.NewErrorWithMsg(
-			http.StatusBadRequest, types.BadRequest, "invalid public key hex",
-		)
-	}
-
+	// Validate the payload fields - DO it later
+	// if !utils.IsValidChainName(payload.ChainName) {
+	// 	return nil, types.NewErrorWithMsg(
+	// 		http.StatusBadRequest, types.BadRequest, "invalid chain name",
+	// 	)
+	// }
+	// if !utils.IsValidAddressHex(payload.BTCAddressHex) {
+	// 	return nil, types.NewErrorWithMsg(
+	// 		http.StatusBadRequest, types.BadRequest, "invalid address hex",
+	// 	)
+	// }
+	// if !utils.IsValidPublickeyHex(payload.PublicKeyHex) {
+	// 	return nil, types.NewErrorWithMsg(
+	// 		http.StatusBadRequest, types.BadRequest, "invalid public key hex",
+	// 	)
+	// }
 	return payload, nil
 }
 
