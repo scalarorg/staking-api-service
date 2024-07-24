@@ -53,7 +53,7 @@ func (db *Database) UpdateDApp(ctx context.Context, ID, chainName, addressHex, p
 	return updateResult.Err()
 }
 
-func (db *Database) ActiveDApp(ctx context.Context, ID string) error {
+func (db *Database) ToggleDApp(ctx context.Context, ID string) error {
 	dApps := db.Client.Database(db.DbName).Collection(model.DAppCollection)
 	// convert ID to objectID
 	_id, err := primitive.ObjectIDFromHex(ID)

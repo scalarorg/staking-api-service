@@ -106,12 +106,12 @@ func (h *Handler) UpdateDApp(request *http.Request) (*Result, *types.Error) {
 	return NewResult(payload), nil
 }
 
-func (h *Handler) ActiveDApp(request *http.Request) (*Result, *types.Error) {
+func (h *Handler) ToggleDApp(request *http.Request) (*Result, *types.Error) {
 	payload, err := parseIdDAppPayload(request)
 	if err != nil {
 		return nil, err
 	}
-	err = h.services.ActiveDApp(request.Context(), payload.ID)
+	err = h.services.ToggleDApp(request.Context(), payload.ID)
 	if err != nil {
 		return nil, err
 	}

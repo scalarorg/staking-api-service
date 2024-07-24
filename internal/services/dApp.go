@@ -33,8 +33,8 @@ func (s *Services) UpdateDApp(ctx context.Context, ID, chainName, btcAddressHex,
 	return nil
 }
 
-func (s *Services) ActiveDApp(ctx context.Context, ID string) *types.Error {
-	err := s.DbClient.ActiveDApp(ctx, ID)
+func (s *Services) ToggleDApp(ctx context.Context, ID string) *types.Error {
+	err := s.DbClient.ToggleDApp(ctx, ID)
 	if err != nil {
 		return types.NewError(http.StatusInternalServerError, types.InternalServiceError, err)
 	}
