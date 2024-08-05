@@ -3,8 +3,8 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/babylonchain/staking-api-service/internal/types"
-	"github.com/babylonchain/staking-api-service/internal/utils"
+	"github.com/scalarorg/staking-api-service/internal/types"
+	"github.com/scalarorg/staking-api-service/internal/utils"
 )
 
 // GetStakerDelegations @Summary Get staker delegations

@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"testing"
 
-	testmock "github.com/babylonchain/staking-api-service/tests/mocks"
+	testmock "github.com/scalarorg/staking-api-service/tests/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

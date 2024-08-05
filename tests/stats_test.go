@@ -10,11 +10,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/babylonchain/staking-api-service/internal/api/handlers"
-	"github.com/babylonchain/staking-api-service/internal/config"
-	"github.com/babylonchain/staking-api-service/internal/db/model"
-	"github.com/babylonchain/staking-api-service/internal/services"
 	"github.com/babylonchain/staking-queue-client/client"
+	"github.com/scalarorg/staking-api-service/internal/api/handlers"
+	"github.com/scalarorg/staking-api-service/internal/config"
+	"github.com/scalarorg/staking-api-service/internal/db/model"
+	"github.com/scalarorg/staking-api-service/internal/services"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -349,7 +349,7 @@ func FuzzStatsEndpointReturnHighestUnconfirmedTvlFromEvents(f *testing.F) {
 		overallStats = fetchOverallStatsEndpoint(t, testServer)
 		assert.Equal(t, &highestHeightEvent.UnconfirmedTvl, &overallStats.UnconfirmedTvl)
 		pendingTvl := int64(highestHeightEvent.UnconfirmedTvl) - int64(highestHeightEvent.ConfirmedTvl)
-		assert.Equal(t, pendingTvl, overallStats.PendingTvl) 
+		assert.Equal(t, pendingTvl, overallStats.PendingTvl)
 	})
 }
 

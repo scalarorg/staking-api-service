@@ -1,8 +1,8 @@
 package api
 
 import (
-	_ "github.com/babylonchain/staking-api-service/docs"
 	"github.com/go-chi/chi"
+	_ "github.com/scalarorg/staking-api-service/docs"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 

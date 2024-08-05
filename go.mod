@@ -1,4 +1,4 @@
-module github.com/babylonchain/staking-api-service
+module github.com/scalarorg/staking-api-service
 
 go 1.22.3
 

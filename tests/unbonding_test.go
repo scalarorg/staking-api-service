@@ -14,13 +14,13 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/babylonchain/staking-api-service/internal/api"
-	"github.com/babylonchain/staking-api-service/internal/api/handlers"
-	"github.com/babylonchain/staking-api-service/internal/config"
-	"github.com/babylonchain/staking-api-service/internal/db/model"
-	"github.com/babylonchain/staking-api-service/internal/services"
-	"github.com/babylonchain/staking-api-service/internal/types"
-	testmock "github.com/babylonchain/staking-api-service/tests/mocks"
+	"github.com/scalarorg/staking-api-service/internal/api"
+	"github.com/scalarorg/staking-api-service/internal/api/handlers"
+	"github.com/scalarorg/staking-api-service/internal/config"
+	"github.com/scalarorg/staking-api-service/internal/db/model"
+	"github.com/scalarorg/staking-api-service/internal/services"
+	"github.com/scalarorg/staking-api-service/internal/types"
+	testmock "github.com/scalarorg/staking-api-service/tests/mocks"
 )
 
 const (

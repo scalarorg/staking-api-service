@@ -15,7 +15,7 @@ import (
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcd/wire"
 
-	"github.com/babylonchain/staking-api-service/internal/types"
+	"github.com/scalarorg/staking-api-service/internal/types"
 )
 
 const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

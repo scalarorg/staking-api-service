@@ -23,14 +23,14 @@ import (
 
 	queueConfig "github.com/babylonchain/staking-queue-client/config"
 
-	"github.com/babylonchain/staking-api-service/internal/api"
-	"github.com/babylonchain/staking-api-service/internal/api/middlewares"
-	"github.com/babylonchain/staking-api-service/internal/config"
-	"github.com/babylonchain/staking-api-service/internal/db"
-	"github.com/babylonchain/staking-api-service/internal/observability/metrics"
-	"github.com/babylonchain/staking-api-service/internal/queue"
-	"github.com/babylonchain/staking-api-service/internal/services"
-	"github.com/babylonchain/staking-api-service/internal/types"
+	"github.com/scalarorg/staking-api-service/internal/api"
+	"github.com/scalarorg/staking-api-service/internal/api/middlewares"
+	"github.com/scalarorg/staking-api-service/internal/config"
+	"github.com/scalarorg/staking-api-service/internal/db"
+	"github.com/scalarorg/staking-api-service/internal/observability/metrics"
+	"github.com/scalarorg/staking-api-service/internal/queue"
+	"github.com/scalarorg/staking-api-service/internal/services"
+	"github.com/scalarorg/staking-api-service/internal/types"
 )
 
 type TestServerDependency struct {
@@ -266,7 +266,7 @@ func sendTestMessage[T any](client client.QueueClient, data []T) error {
 	return nil
 }
 
-func directDbConnection(t *testing.T) (*db.Database) {
+func directDbConnection(t *testing.T) *db.Database {
 	cfg, err := config.New("./config/config-test.yml")
 	if err != nil {
 		t.Fatalf("Failed to load test config: %v", err)
@@ -294,7 +294,7 @@ func injectDbDocuments[T any](t *testing.T, collectionName string, doc T) {
 
 // Inspect the items in the real database
 func inspectDbDocuments[T any](t *testing.T, collectionName string) ([]T, error) {
-		connection := directDbConnection(t)
+	connection := directDbConnection(t)
 	collection := connection.Client.Database(connection.DbName).Collection(collectionName)
 
 	cursor, err := collection.Find(context.Background(), bson.D{})

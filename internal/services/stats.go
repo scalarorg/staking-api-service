@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/babylonchain/staking-api-service/internal/db"
-	"github.com/babylonchain/staking-api-service/internal/types"
 	"github.com/rs/zerolog/log"
+	"github.com/scalarorg/staking-api-service/internal/db"
+	"github.com/scalarorg/staking-api-service/internal/types"
 )
 
 type OverallStatsPublic struct {

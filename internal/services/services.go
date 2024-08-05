@@ -6,9 +6,9 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/babylonchain/staking-api-service/internal/config"
-	"github.com/babylonchain/staking-api-service/internal/db"
-	"github.com/babylonchain/staking-api-service/internal/types"
+	"github.com/scalarorg/staking-api-service/internal/config"
+	"github.com/scalarorg/staking-api-service/internal/db"
+	"github.com/scalarorg/staking-api-service/internal/types"
 )
 
 // Service layer contains the business logic and is used to interact with

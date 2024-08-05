@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/babylonchain/staking-api-service/internal/api/handlers"
-	"github.com/babylonchain/staking-api-service/internal/api/middlewares"
-	"github.com/babylonchain/staking-api-service/internal/config"
-	"github.com/babylonchain/staking-api-service/internal/services"
 	"github.com/go-chi/chi"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"github.com/scalarorg/staking-api-service/internal/api/handlers"
+	"github.com/scalarorg/staking-api-service/internal/api/middlewares"
+	"github.com/scalarorg/staking-api-service/internal/config"
+	"github.com/scalarorg/staking-api-service/internal/services"
 )
 
 type Server struct {
