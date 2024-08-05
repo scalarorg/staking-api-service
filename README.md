@@ -41,7 +41,7 @@ followed by waiting for the staking period (timelock) to expire.
 1. **Transaction Submission**: User-submitted staking transactions are 
 confirmed and picked up by the [indexer](https://github.com/babylonchain/staking-indexer) 
 after receiving sufficient Bitcoin block confirmations.
-2. **Event Queuing**: The indexer sends `ActiveStakingEvent` [messages](https://github.com/babylonchain/staking-queue-client/blob/main/client/schema.go#L24) 
+2. **Event Queuing**: The indexer sends `ActiveStakingEvent` [messages](https://github.com/scalarorg/staking-queue-client/blob/main/client/schema.go#L24) 
 to the Active Event Queue for the staking API service to process.
 3. **Processing and State Management**: The staking API service executes statistical calculations, 
 data transformation, and staking state management, inserting records into the `timelock_queue` collection.
@@ -64,12 +64,12 @@ stores it for further processing by the unbonding pipeline.
 3. **Committee Co-Signing**: The unbonding pipeline collects additional signatures 
 from the covenant committee and submits the unbonding transaction to the Bitcoin network.
 4. **Transaction Detection**: The unbonding transaction is detected by the staking-indexer 
-once it receives a sufficient number of confirmations and a corresponding [unbonding event](https://github.com/babylonchain/staking-queue-client/blob/main/client/schema.go#L70) 
+once it receives a sufficient number of confirmations and a corresponding [unbonding event](https://github.com/scalarorg/staking-queue-client/blob/main/client/schema.go#L70) 
 is placed into the RabbitMQ queue.
 5. **Processing and State Management**: Similar to the standard path, the staking API service 
 handles statistical updates, adjusts the staking state, and inserts a record into the `timelock_queue`.
 6. **Finalization**: The expire-service processes items from the `timelock_queue` in 
-MongoDB and emits an [expired event](https://github.com/babylonchain/staking-queue-client/blob/main/client/schema.go#L130) 
+MongoDB and emits an [expired event](https://github.com/scalarorg/staking-queue-client/blob/main/client/schema.go#L130) 
 to RabbitMQ for the staking-api-service to process. This marks completed staking 
 transactions as `unbonded`. This status displays to the user that the staking transaction is ready for withdrawal.
 

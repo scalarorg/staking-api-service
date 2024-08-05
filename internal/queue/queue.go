@@ -7,14 +7,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/babylonchain/staking-queue-client/client"
-	queueConfig "github.com/babylonchain/staking-queue-client/config"
 	"github.com/rs/zerolog/log"
 	"github.com/scalarorg/staking-api-service/internal/observability/metrics"
 	"github.com/scalarorg/staking-api-service/internal/observability/tracing"
 	"github.com/scalarorg/staking-api-service/internal/queue/handlers"
 	"github.com/scalarorg/staking-api-service/internal/services"
 	"github.com/scalarorg/staking-api-service/internal/types"
+	"github.com/scalarorg/staking-queue-client/client"
+	queueConfig "github.com/scalarorg/staking-queue-client/config"
 )
 
 type Queues struct {
@@ -27,6 +27,11 @@ type Queues struct {
 	WithdrawStakingQueueClient  client.QueueClient
 	StatsQueueClient            client.QueueClient
 	BtcInfoQueueClient          client.QueueClient
+	// SCALAR
+	ActiveVaultQueueClient            client.QueueClient
+	BurningVaultQueueClient           client.QueueClient
+	SlashingOrLostKeyVaultQueueClient client.QueueClient
+	BurnWithoutDAppVaultQueueClient   client.QueueClient
 }
 
 func New(cfg *queueConfig.QueueConfig, service *services.Services) *Queues {
@@ -72,6 +77,36 @@ func New(cfg *queueConfig.QueueConfig, service *services.Services) *Queues {
 		log.Fatal().Err(err).Msg("error while creating BtcInfoQueueClient")
 	}
 
+	// SCALAR
+
+	activeVaultQueueClient, err := client.NewQueueClient(
+		cfg, client.ActiveVaultQueueName,
+	)
+	if err != nil {
+		log.Fatal().Err(err).Msg("error while creating ActiveVaultQueueClient")
+	}
+
+	burningVaultQueueClient, err := client.NewQueueClient(
+		cfg, client.BurningVaultQueueName,
+	)
+	if err != nil {
+		log.Fatal().Err(err).Msg("error while creating BurningVaultQueueClient")
+	}
+
+	slashingOrLostKeyVaultQueueClient, err := client.NewQueueClient(
+		cfg, client.SlashingOrLostKeyVaultQueueName,
+	)
+	if err != nil {
+		log.Fatal().Err(err).Msg("error while creating SlashingOrLostKeyQueueClient")
+	}
+
+	burnWithoutDAppVaultQueueClient, err := client.NewQueueClient(
+		cfg, client.BurnWithoutDAppVaultQueueName,
+	)
+	if err != nil {
+		log.Fatal().Err(err).Msg("error while creating BurnWithoutDAppQueueClient")
+	}
+
 	handlers := handlers.NewQueueHandler(service, statsQueueClient.SendMessage)
 	return &Queues{
 		Handlers:                    handlers,
@@ -83,6 +118,11 @@ func New(cfg *queueConfig.QueueConfig, service *services.Services) *Queues {
 		WithdrawStakingQueueClient:  withdrawStakingQueueClient,
 		StatsQueueClient:            statsQueueClient,
 		BtcInfoQueueClient:          btcInfoQueueClient,
+		// SCALAR
+		ActiveVaultQueueClient:       activeVaultQueueClient,
+		BurningVaultQueueClient:      burningVaultQueueClient,
+		SlashingOrLostKeyQueueClient: slashingOrLostKeyQueueClient,
+		BurnWithoutDAppQueueClient:   burnWithoutDAppQueueClient,
 	}
 }
 
@@ -119,7 +159,27 @@ func (q *Queues) StartReceivingMessages() {
 		q.Handlers.BtcInfoHandler, q.Handlers.HandleUnprocessedMessage,
 		q.maxRetryAttempts, q.processingTimeout,
 	)
-	// ...add more queues here
+	// SCALAR
+	startQueueMessageProcessing(
+		q.ActiveVaultQueueClient,
+		q.Handlers.ActiveVaultHandler, q.Handlers.HandleUnprocessedMessage,
+		q.maxRetryAttempts, q.processingTimeout,
+	)
+	startQueueMessageProcessing(
+		q.BurningVaultQueueClient,
+		q.Handlers.BurningVaultHandler, q.Handlers.HandleUnprocessedMessage,
+		q.maxRetryAttempts, q.processingTimeout,
+	)
+	startQueueMessageProcessing(
+		q.SlashingOrLostKeyVaultQueueClient,
+		q.Handlers.SlashingOrLostKeyVaultHandler, q.Handlers.HandleUnprocessedMessage,
+		q.maxRetryAttempts, q.processingTimeout,
+	)
+	startQueueMessageProcessing(
+		q.BurnWithoutDAppVaultQueueClient,
+		q.Handlers.BurnWithoutDAppVaultHandler, q.Handlers.HandleUnprocessedMessage,
+		q.maxRetryAttempts, q.processingTimeout,
+	)
 }
 
 // Turn off all message processing

@@ -13,15 +13,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/babylonchain/staking-queue-client/client"
 	"github.com/go-chi/chi"
 	"github.com/rabbitmq/amqp091-go"
+	"github.com/scalarorg/staking-queue-client/client"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	queueConfig "github.com/babylonchain/staking-queue-client/config"
+	queueConfig "github.com/scalarorg/staking-queue-client/config"
 
 	"github.com/scalarorg/staking-api-service/internal/api"
 	"github.com/scalarorg/staking-api-service/internal/api/middlewares"
@@ -320,7 +320,7 @@ func buildActiveStakingEvent(t *testing.T, numOfEvenet int) []*client.ActiveStak
 	var activeStakingEvents []*client.ActiveStakingEvent
 	stakerPk, err := randomPk()
 	require.NoError(t, err)
-	// To be replaced with https://github.com/babylonchain/staking-api-service/issues/21
+	// To be replaced with https://github.com/scalarorg/staking-api-service/issues/21
 	rand.New(rand.NewSource(time.Now().Unix()))
 
 	for i := 0; i < numOfEvenet; i++ {

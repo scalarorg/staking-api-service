@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	queueClient "github.com/babylonchain/staking-queue-client/client"
 	"github.com/rs/zerolog/log"
 	"github.com/scalarorg/staking-api-service/internal/types"
+	queueClient "github.com/scalarorg/staking-queue-client/client"
 )
 
 func (h *QueueHandler) BtcInfoHandler(ctx context.Context, messageBody string) *types.Error {

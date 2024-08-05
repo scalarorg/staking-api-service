@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/babylonchain/staking-queue-client/client"
 	"github.com/scalarorg/staking-api-service/cmd/staking-api-service/scripts"
 	"github.com/scalarorg/staking-api-service/internal/api/handlers"
 	"github.com/scalarorg/staking-api-service/internal/db/model"
+	"github.com/scalarorg/staking-queue-client/client"
 	"github.com/stretchr/testify/assert"
 )
 
