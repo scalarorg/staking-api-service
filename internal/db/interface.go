@@ -71,11 +71,13 @@ type DBClient interface {
 	TransitionToSlashingOrLostKeyState(ctx context.Context, vaultTxHashHex string) error
 	TransitionToBurnWithoutDAppState(ctx context.Context, vaultTxHashHex string) error
 
-	SaveDApp(ctx context.Context, ChainName, AddressHex, PublicKeyHex string) error
+	SaveDApp(ctx context.Context, ChainName, Address, PublicKeyHex string) error
 	GetDApp(ctx context.Context) ([]*model.DAppDocument, error)
 	UpdateDApp(ctx context.Context, ID, ChainName, AddressHex, PublicKeyHex string) error
 	ToggleDApp(ctx context.Context, ID string) error
 	DeleteDApp(ctx context.Context, ID string) error
+
+	FindDAppStats(ctx context.Context, paginationToken string) (*DbResultMap[*model.DAppDocument], error)
 }
 
 type DelegationFilter struct {

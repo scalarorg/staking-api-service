@@ -24,6 +24,7 @@ const (
 	BtcInfoCollection               = "btc_info"
 	UnprocessableMsgCollection      = "unprocessable_messages"
 	DAppCollection                  = "dapps"
+	DAppStatsCollection             = "dapp_stats"
 )
 
 type index struct {
