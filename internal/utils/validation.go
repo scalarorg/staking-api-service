@@ -35,8 +35,14 @@ func IsValidBtcAddress(btcAddress string, params *chaincfg.Params) error {
 }
 
 // IsValidBtcAddress checks if the provided address is a valid BTC address
-func IsValidPublickeyHex(publicKeyHex string) bool {
-	_, err := hex.DecodeString(publicKeyHex)
+func IsValidPublicKeyHex(publicKeyHex string) bool {
+	pubKey, err := hex.DecodeString(publicKeyHex)
+	if len(pubKey) != 33 {
+		return false
+	}
+	if pubKey[0] != 0x02 && pubKey[0] != 0x03 {
+		return false
+	}
 	return err == nil
 }
 
