@@ -119,10 +119,10 @@ func New(cfg *queueConfig.QueueConfig, service *services.Services) *Queues {
 		StatsQueueClient:            statsQueueClient,
 		BtcInfoQueueClient:          btcInfoQueueClient,
 		// SCALAR
-		ActiveVaultQueueClient:       activeVaultQueueClient,
-		BurningVaultQueueClient:      burningVaultQueueClient,
-		SlashingOrLostKeyQueueClient: slashingOrLostKeyQueueClient,
-		BurnWithoutDAppQueueClient:   burnWithoutDAppQueueClient,
+		ActiveVaultQueueClient:            activeVaultQueueClient,
+		BurningVaultQueueClient:           burningVaultQueueClient,
+		SlashingOrLostKeyVaultQueueClient: slashingOrLostKeyVaultQueueClient,
+		BurnWithoutDAppVaultQueueClient:   burnWithoutDAppVaultQueueClient,
 	}
 }
 

@@ -67,6 +67,10 @@ type DBClient interface {
 		ctx context.Context, address string, extraFilter *DelegationFilter,
 	) (bool, error)
 
+	TransitionToBurningState(ctx context.Context, vaultTxHashHex string) error
+	TransitionToSlashingOrLostKeyState(ctx context.Context, vaultTxHashHex string) error
+	TransitionToBurnWithoutDAppState(ctx context.Context, vaultTxHashHex string) error
+
 	SaveDApp(ctx context.Context, ChainName, AddressHex, PublicKeyHex string) error
 	GetDApp(ctx context.Context) ([]*model.DAppDocument, error)
 	UpdateDApp(ctx context.Context, ID, ChainName, AddressHex, PublicKeyHex string) error

@@ -45,3 +45,30 @@ func QualifiedStatesToWithdraw() []types.DelegationState {
 func OutdatedStatesForWithdraw() []types.DelegationState {
 	return []types.DelegationState{types.Withdrawn}
 }
+
+// QualifiedStatesToBurning returns the qualified exisitng states to transition to "burning"
+func QualifiedStatesToBurning() []types.DelegationState {
+	return []types.DelegationState{types.Active}
+}
+
+func OutdatedStatesForBurning() []types.DelegationState {
+	return []types.DelegationState{types.Burned}
+}
+
+// QualifiedStatesToSlashingOrLostKey returns the qualified exisitng states to transition to "burning"
+func QualifiedStatesToSlashingOrLostKey() []types.DelegationState {
+	return []types.DelegationState{types.Active}
+}
+
+func OutdatedStatesForSlashingOrLostKey() []types.DelegationState {
+	return []types.DelegationState{types.Slashed}
+}
+
+// QualifiedStatesToBurnWithoutDApp returns the qualified exisitng states to transition to "burning"
+func QualifiedStatesToBurnWithoutDApp() []types.DelegationState {
+	return []types.DelegationState{types.Active}
+}
+
+func OutdatedStatesForBurnWithoutDApp() []types.DelegationState {
+	return []types.DelegationState{types.WithoutDAppBurned}
+}

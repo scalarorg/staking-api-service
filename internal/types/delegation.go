@@ -10,6 +10,9 @@ const (
 	Unbonding          DelegationState = "unbonding"
 	Unbonded           DelegationState = "unbonded"
 	Withdrawn          DelegationState = "withdrawn"
+	Burned             DelegationState = "burned"
+	Slashed            DelegationState = "slashed"
+	WithoutDAppBurned  DelegationState = "without_dapp_burned"
 )
 
 func (s DelegationState) ToString() string {
