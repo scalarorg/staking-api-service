@@ -13,6 +13,7 @@ import (
 	"github.com/scalarorg/staking-api-service/internal/types"
 )
 
+// This is also save the active vault
 func (db *Database) SaveActiveStakingDelegation(
 	ctx context.Context, stakingTxHashHex, stakerPkHex, fpPkHex string,
 	stakingTxHex string, amount, startHeight, timelock, outputIndex uint64,
