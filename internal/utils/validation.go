@@ -34,6 +34,12 @@ func IsValidBtcAddress(btcAddress string, params *chaincfg.Params) error {
 	}
 }
 
+// IsValidBtcAddress checks if the provided address is a valid BTC address
+func IsValidPublickeyHex(publicKeyHex string) bool {
+	_, err := hex.DecodeString(publicKeyHex)
+	return err == nil
+}
+
 // IsValidTxHash checks if the given string is a valid BTC transaction hash
 // Note: it does not check the actual content of the hash.
 func IsValidTxHash(txHash string) bool {
@@ -77,4 +83,10 @@ func IsValidSignatureFormat(sigHex string) bool {
 	}
 	_, err = schnorr.ParseSignature(sigBytes)
 	return err == nil
+}
+
+func IsValidChainName(chainName string) bool {
+	// Regular expression to match valid chain names.
+	chainNameRegex := regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
+	return chainNameRegex.MatchString(chainName)
 }
