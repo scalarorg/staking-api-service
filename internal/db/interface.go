@@ -72,6 +72,8 @@ type DBClient interface {
 	UpdateDApp(ctx context.Context, ID, ChainName, AddressHex, PublicKeyHex string) error
 	ToggleDApp(ctx context.Context, ID string) error
 	DeleteDApp(ctx context.Context, ID string) error
+
+	GetGMPs(ctx context.Context) ([]*model.GMPDocument, error)
 }
 
 type DelegationFilter struct {

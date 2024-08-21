@@ -26,5 +26,7 @@ func (a *Server) SetupRoutes(r *chi.Mux) {
 	r.Patch("/v1/dApp", registerHandler(handlers.ToggleDApp))
 	r.Delete("/v1/dApp", registerHandler(handlers.DeleteDApp))
 
+	r.Get("/v1/gmp", registerHandler(handlers.GetGMPs))
+
 	r.Get("/swagger/*", httpSwagger.WrapHandler)
 }

@@ -18,6 +18,148 @@ type DBClient struct {
 	mock.Mock
 }
 
+// GetGMPs provides a mock function with given fields: ctx
+func (_m *DBClient) GetGMPs(ctx context.Context) ([]*model.GMPDocument, error) {
+	ret := _m.Called(ctx)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetGMPs")
+	}
+
+	var r0 []*model.GMPDocument
+	var r1 error
+
+	if rf, ok := ret.Get(0).(func(context.Context) ([]*model.GMPDocument, error)); ok {
+		return rf(ctx)
+	}
+
+	if rf, ok := ret.Get(0).(func(context.Context) []*model.GMPDocument); ok {
+		r0 = rf(ctx)
+
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*model.GMPDocument)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context) error); ok {
+		r1 = rf(ctx)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+
+// UpdateDApp provides a mock function with given fields: ctx, ID, chainName, addressHex, publicKeyHex
+func (_m *DBClient) UpdateDApp(ctx context.Context, ID string, chainName string, addressHex string, publicKeyHex string) error {
+	ret := _m.Called(ctx, ID, chainName, addressHex, publicKeyHex)
+
+	if len(ret) == 0 {
+		panic("no return value specified for UpdateDApp")
+	}
+
+	var r0 error
+
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string, string) error); ok {
+		r0 = rf(ctx, ID, chainName, addressHex, publicKeyHex)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// ToggleDApp provides a mock function with given fields: ctx, ID
+func (_m *DBClient) ToggleDApp(ctx context.Context, ID string) error {
+	ret := _m.Called(ctx, ID)
+
+	if len(ret) == 0 {
+		panic("no return value specified for ToggleDApp")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string) error); ok {
+		r0 = rf(ctx, ID)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// SaveDA provides a mock function with given fields: ctx, chainName, addressHex, publicKeyHex
+func (_m *DBClient) SaveDApp(ctx context.Context, chainName string, addressHex string, publicKeyHex string) error {
+	ret := _m.Called(ctx, chainName, addressHex, publicKeyHex)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SaveDApp")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) error); ok {
+		r0 = rf(ctx, chainName, addressHex, publicKeyHex)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// GetDApp provides a mock function with given fields: ctx
+func (_m *DBClient) GetDApp(ctx context.Context) ([]*model.DAppDocument, error) {
+	ret := _m.Called(ctx)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetDApp")
+	}
+
+	var r0 []*model.DAppDocument
+	var r1 error
+
+	if rf, ok := ret.Get(0).(func(context.Context) ([]*model.DAppDocument, error)); ok {
+		return rf(ctx)
+	}
+
+	if rf, ok := ret.Get(0).(func(context.Context) []*model.DAppDocument); ok {
+		r0 = rf(ctx)
+
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*model.DAppDocument)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context) error); ok {
+		r1 = rf(ctx)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// DeleteDApp provides a mock function with given fields: ctx, dAppId
+func (_m *DBClient) DeleteDApp(ctx context.Context, dAppId string) error {
+	ret := _m.Called(ctx, dAppId)
+
+	if len(ret) == 0 {
+		panic("no return value specified for DeleteDapp")
+
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string) error); ok {
+
+		r0 = rf(ctx, dAppId)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // CheckDelegationExistByStakerTaprootAddress provides a mock function with given fields: ctx, address, extraFilter
 func (_m *DBClient) CheckDelegationExistByStakerTaprootAddress(ctx context.Context, address string, extraFilter *db.DelegationFilter) (bool, error) {
 	ret := _m.Called(ctx, address, extraFilter)

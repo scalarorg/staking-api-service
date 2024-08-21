@@ -24,6 +24,7 @@ const (
 	BtcInfoCollection               = "btc_info"
 	UnprocessableMsgCollection      = "unprocessable_messages"
 	DAppCollection                  = "dapps"
+	GMPCollection                   = "gmps"
 )
 
 type index struct {
@@ -45,6 +46,7 @@ var collections = map[string][]index{
 	UnprocessableMsgCollection: {{Indexes: map[string]int{}}},
 	BtcInfoCollection:          {{Indexes: map[string]int{}}},
 	DAppCollection:             {{Indexes: map[string]int{"chain_name": 1, "btc_address_hex": 1, "public_key_hex": 1, "state": 1}, Unique: true}},
+	GMPCollection:              {{Indexes: map[string]int{}, Unique: true}},
 }
 
 func Setup(ctx context.Context, cfg *config.Config) error {
